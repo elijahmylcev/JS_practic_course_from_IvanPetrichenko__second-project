@@ -954,8 +954,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modals = function modals() {
+  // Переменная показывает, кликнута хотя бы одна кнопка или нет
+  var btnPressed = false;
+
   function bindModal(triggerSelector, modalSelector, closeSelector) {
-    var closeCLickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+    var destroy = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     var trigger = document.querySelectorAll(triggerSelector);
     var modal = document.querySelector(modalSelector);
     var close = document.querySelector(closeSelector);
@@ -965,6 +968,12 @@ var modals = function modals() {
       item.addEventListener('click', function (event) {
         if (event.target) {
           event.preventDefault();
+        }
+
+        btnPressed = true;
+
+        if (destroy) {
+          item.remove();
         }
 
         windows.forEach(function (item) {
@@ -985,7 +994,7 @@ var modals = function modals() {
     });
     modal.addEventListener('click', function (event) {
       // Если кликнуть на подложку, modal закрывается
-      if (event.target === modal && closeCLickOverlay) {
+      if (event.target === modal) {
         windows.forEach(function (item) {
           return item.style.display = 'none';
         });
@@ -1008,6 +1017,8 @@ var modals = function modals() {
       if (!display) {
         document.querySelector(selector).style.display = 'block';
         document.body.style.overflow = 'hidden';
+        var scroll = calcScroll();
+        document.body.style.marginRight = "".concat(scroll, "px");
       }
     }, time);
   }
@@ -1024,9 +1035,18 @@ var modals = function modals() {
     return scrollWidth;
   }
 
+  function openByScroll(selector) {
+    window.addEventListener('scroll', function () {
+      if (!btnPressed && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+        document.querySelector(selector).click();
+      }
+    });
+  }
+
   bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
   bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
-  showModalByTime('.popup-consultation', 5000);
+  bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
+  openByScroll('.fixed-gift'); // showModalByTime('.popup-consultation', 60000);
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (modals);
