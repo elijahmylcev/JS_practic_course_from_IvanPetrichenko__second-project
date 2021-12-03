@@ -21,7 +21,12 @@ const modals = () => {
           item.remove();
         }
 
-        windows.forEach((item) => (item.style.display = 'none'));
+        // Скрываем все модальные окна
+        windows.forEach((item) => {
+          item.style.display = 'none';
+          // Added animation
+          item.classList.add('animated', 'fadeIn');
+        });
 
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -86,10 +91,14 @@ const modals = () => {
 
   function openByScroll(selector) {
     window.addEventListener('scroll', () => {
+      let scrollHeight = Math.max(
+        document.documentElement.scrollHeight,
+        document.body.scrollHeight,
+      );
+
       if (
         !btnPressed &&
-        window.pageYOffset + document.documentElement.clientHeight >=
-          document.documentElement.scrollHeight
+        window.pageYOffset + document.documentElement.clientHeight >= scrollHeight
       ) {
         document.querySelector(selector).click();
       }

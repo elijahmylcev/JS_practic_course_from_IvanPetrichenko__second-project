@@ -974,10 +974,13 @@ var modals = function modals() {
 
         if (destroy) {
           item.remove();
-        }
+        } // Скрываем все модальные окна
+
 
         windows.forEach(function (item) {
-          return item.style.display = 'none';
+          item.style.display = 'none'; // Added animation
+
+          item.classList.add('animated', 'fadeIn');
         });
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden';
@@ -1037,7 +1040,9 @@ var modals = function modals() {
 
   function openByScroll(selector) {
     window.addEventListener('scroll', function () {
-      if (!btnPressed && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+      var scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+
+      if (!btnPressed && window.pageYOffset + document.documentElement.clientHeight >= scrollHeight) {
         document.querySelector(selector).click();
       }
     });
