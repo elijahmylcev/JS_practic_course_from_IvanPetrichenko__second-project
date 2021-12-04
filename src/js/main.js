@@ -1,4 +1,5 @@
 import forms from './modules/forms';
+import mask from './modules/mask';
 import modals from './modules/modals';
 import sliders from './modules/sliders';
 
@@ -11,4 +12,5 @@ window.addEventListener('DOMContentLoaded', () => {
   // vertical slider
   sliders('.main-slider-item', 'vertical');
   forms();
+  mask('[name="phone"]');
 });
