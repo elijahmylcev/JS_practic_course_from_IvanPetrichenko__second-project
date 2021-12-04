@@ -3,6 +3,7 @@
 const forms = () => {
   const form = document.querySelectorAll('form');
   const inputs = document.querySelectorAll('input');
+  const upload = document.querySelectorAll('[name="upload"]');
 
   // Валидация phone
   // checkNumInputs('input[name="user_phone"]');
@@ -34,7 +35,22 @@ const forms = () => {
     inputs.forEach((item) => {
       item.value = '';
     });
+    upload.forEach((item) => {
+      item.previousElementSibling.textContent = 'Файл не выбран';
+    });
   };
+
+  upload.forEach((item) => {
+    item.addEventListener('input', () => {
+      console.log(item.files[0]);
+      let dots;
+      const arr = item.files[0].name.split('.');
+
+      arr[0].length > 5 ? (dots = '...') : (dots = '.');
+      const name = arr[0].substring(0, 6) + dots + arr[1];
+      item.previousElementSibling.textContent = name;
+    });
+  });
 
   form.forEach((item) => {
     item.addEventListener('submit', (e) => {
@@ -49,7 +65,7 @@ const forms = () => {
         item.style.display = 'none';
       }, 400);
 
-      let statusImg = document.childElement('img');
+      let statusImg = document.createElement('img');
       statusImg.setAttribute('src', message.spinner);
       statusImg.classList.add('animated', 'fadeInUp');
       statusMessage.appendChild(statusImg);
@@ -59,22 +75,29 @@ const forms = () => {
       statusMessage.appendChild(textMessage);
 
       const formData = new FormData(item);
-      if (item.getAttribute('data-calc') === 'end') {
-        for (let key in state) {
-          formData.append(key, state[key]);
-        }
-      }
+      let api;
+      item.closest('.popup-design') || item.classList.contains('calc_form')
+        ? (api = path.designer)
+        : (api = path.question);
 
-      postData('assets/server.php', formData)
+      postData(api, formData)
         .then((res) => {
+          console.log(api);
           console.log(res);
-          statusMessage.textContent = message.success;
+          statusImg.setAttribute('src', message.ok);
+          textMessage.textContent = message.success;
         })
-        .catch(() => (statusMessage.textContent = message.failure))
+        .catch(() => {
+          statusImg.setAttribute('src', message.fail);
+          textMessage.textContent = message.failure;
+        })
         .finally(() => {
           clearInputs();
           setTimeout(() => {
             statusMessage.remove();
+            item.style.display = 'block';
+            item.classList.remove('fadeOutUp');
+            item.classList.add('fadeInUp');
           }, 5000);
         });
     });
