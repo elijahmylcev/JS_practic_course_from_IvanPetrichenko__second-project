@@ -23,7 +23,7 @@ const showMoreStyles = (triggerSelector, wrapper) => {
   });
 
   function createCards(response, wrapper) {
-    response.forEach((item) => {
+    response.forEach(({ src, title, link }) => {
       let card = document.createElement('div');
       card.classList.add(
         'animated',
@@ -36,9 +36,9 @@ const showMoreStyles = (triggerSelector, wrapper) => {
 
       card.innerHTML = `
         <div class='styles-block'>
-          <img src=${item.src} alt>
-          <h4>${item.title}</h4>
-          <a href=${item.link}>Подробнее</a>
+          <img src=${src} alt>
+          <h4>${title}</h4>
+          <a href=${link}>Подробнее</a>
         </div>
        `;
       document.querySelector(wrapper).appendChild(card);
@@ -47,9 +47,3 @@ const showMoreStyles = (triggerSelector, wrapper) => {
 };
 
 export default showMoreStyles;
-
-// {
-//   /* <div class="hidden-lg hidden-md hidden-sm hidden-xs styles-2">
-
-// 				</div> */
-// }
