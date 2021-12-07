@@ -2,7 +2,7 @@ import checkTextInputs from './modules/checkTextInputs';
 import forms from './modules/forms';
 import mask from './modules/mask';
 import modals from './modules/modals';
-import showMoreStyles from './modules/showMoreStyles';
+import showMoreCards from './modules/showMoreCards';
 import sliders from './modules/sliders';
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -17,5 +17,6 @@ window.addEventListener('DOMContentLoaded', () => {
   mask('[name="phone"]');
   checkTextInputs('[name="name"]');
   checkTextInputs('[name="message"]');
-  showMoreStyles('.button-styles', '.styles-2');
+  // showMoreStyles('.button-styles', '.styles-2');
+  showMoreCards('.button-styles', '#styles .row');
 });
