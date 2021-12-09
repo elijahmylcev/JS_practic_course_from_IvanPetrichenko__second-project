@@ -9,6 +9,7 @@ import modals from './modules/modals';
 import pictureSize from './modules/pictureSize';
 import showMoreCards from './modules/showMoreCards';
 import sliders from './modules/sliders';
+import burger from './modules/burger';
 
 window.addEventListener('DOMContentLoaded', () => {
   'use strict';
@@ -29,4 +30,5 @@ window.addEventListener('DOMContentLoaded', () => {
   pictureSize('.sizes-block');
   // accordionStyles('.accordion-heading', '.accordion-block');
   accordion('.accordion-heading');
+  burger('.burger-menu', '.burger');
 });
