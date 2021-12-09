@@ -1,3 +1,4 @@
+import accordionStyles from './modules/accordionStyles';
 import accordion from './modules/accordion';
 import calc from './modules/calc';
 import checkTextInputs from './modules/checkTextInputs';
@@ -26,5 +27,6 @@ window.addEventListener('DOMContentLoaded', () => {
   calc('#size', '#material', '#options', '.promocode', '.calc-price');
   filter();
   pictureSize('.sizes-block');
-  accordion('.accordion-heading', '.accordion-block');
+  // accordionStyles('.accordion-heading', '.accordion-block');
+  accordion('.accordion-heading');
 });
