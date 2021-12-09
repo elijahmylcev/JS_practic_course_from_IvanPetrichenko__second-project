@@ -4413,6 +4413,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_showMoreCards__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./modules/showMoreCards */ "./src/js/modules/showMoreCards.js");
 /* harmony import */ var _modules_sliders__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./modules/sliders */ "./src/js/modules/sliders.js");
 /* harmony import */ var _modules_burger__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./modules/burger */ "./src/js/modules/burger.js");
+/* harmony import */ var _modules_scrolling__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./modules/scrolling */ "./src/js/modules/scrolling.js");
+
 
 
 
@@ -4445,6 +4447,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
   Object(_modules_accordion__WEBPACK_IMPORTED_MODULE_1__["default"])('.accordion-heading');
   Object(_modules_burger__WEBPACK_IMPORTED_MODULE_11__["default"])('.burger-menu', '.burger');
+  Object(_modules_scrolling__WEBPACK_IMPORTED_MODULE_12__["default"])('.pageup');
 });
 
 /***/ }),
@@ -5050,6 +5053,32 @@ var pictureSize = function pictureSize(imgSelector) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (pictureSize);
+
+/***/ }),
+
+/***/ "./src/js/modules/scrolling.js":
+/*!*************************************!*\
+  !*** ./src/js/modules/scrolling.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var scrolling = function scrolling(upSelector) {
+  var upElement = document.querySelector(upSelector);
+  window.addEventListener('scroll', function () {
+    if (document.documentElement.scrollTop > 1650) {
+      upElement.classList.add('animated', 'fadeIn');
+      upElement.classList.remove('fadeOut');
+    } else {
+      upElement.classList.add('fadeOut');
+      upElement.classList.remove('fadeIn');
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (scrolling);
 
 /***/ }),
 
