@@ -4,6 +4,7 @@ import filter from './modules/filter';
 import forms from './modules/forms';
 import mask from './modules/mask';
 import modals from './modules/modals';
+import pictureSize from './modules/pictureSize';
 import showMoreCards from './modules/showMoreCards';
 import sliders from './modules/sliders';
 
@@ -21,8 +22,7 @@ window.addEventListener('DOMContentLoaded', () => {
   checkTextInputs('[name="message"]');
   // showMoreStyles('.button-styles', '.styles-2');
   showMoreCards('.button-styles', '#styles .row');
-
   calc('#size', '#material', '#options', '.promocode', '.calc-price');
-
   filter();
+  pictureSize('.sizes-block');
 });
